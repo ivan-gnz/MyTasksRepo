@@ -1,0 +1,5 @@
+INSERT INTO Task VALUES (1,'In progress','Backend, microservicios con SpringBoot.');
+INSERT INTO Task VALUES (2,'Pending','Repositorio Proyecto, crear repositorio público de GitHub.');
+INSERT INTO Task VALUES (3,'Finished','DevOps, desplegar imagen de la aplicación desde DockerHub en AKS.');
+INSERT INTO Task VALUES (4,'Pending','CRUD, contrato CRUD con Swagger editor.');
+INSERT INTO Task VALUES (5,'In progress','Frontend, con angular(typescript).');
