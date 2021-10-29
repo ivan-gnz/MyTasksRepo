@@ -41,9 +41,9 @@ public class LibraryController {
 		if(!libraryService.checkBookAlreadyExist(id)) {
 			logger.info("Book do not exist so creating one");
 			library.setId(id);
-			repository.save(library);
+			repository.save(library); //mock
 			
-			ad.setMsg("Sucess Book is Added");
+			ad.setMsg("Success Book is Added");
 			ad.setId(id);
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("unique", id);
@@ -79,7 +79,8 @@ public class LibraryController {
 	@PutMapping("/updateBook/{id}")
 	public ResponseEntity<Library> updateBook(@PathVariable(value="id")String id, @RequestBody Library library) {
 	
-		Library existingBook = repository.findById(id).get();
+		//Library existingBook = repository.findById(id).get();
+		Library existingBook = libraryService.getBookById(id);
 		
 		existingBook.setAisle(library.getAisle());
 		existingBook.setAuthor(library.getAuthor());
@@ -91,7 +92,9 @@ public class LibraryController {
 	
 	@DeleteMapping("/deleteBook")
 	public ResponseEntity<String> deleteBookById(@RequestBody Library library) {
-		Library libraryDelete = repository.findById(library.getId()).get();
+		//Library libraryDelete = repository.findById(library.getId()).get();
+		Library libraryDelete = libraryService.getBookById(library.getId());
+
 		repository.delete(libraryDelete);
 		
 		logger.info("Book  is deleted ");

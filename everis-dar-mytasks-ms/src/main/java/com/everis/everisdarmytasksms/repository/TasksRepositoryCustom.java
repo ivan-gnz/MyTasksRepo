@@ -6,6 +6,6 @@ import com.everis.everisdarmytasksms.controller.Task;
 
 public interface TasksRepositoryCustom {
 
-	//List<Task> findAllByAuthor(String authorName);
+	List<Task> findAllByStatus(String status);
 	
 }

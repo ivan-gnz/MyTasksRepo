@@ -15,7 +15,11 @@ public class LibraryService {
 	LibraryRepository repository;
 	
 	public String buildId (String isbn, int aisle) {
-		return isbn+aisle;
+		if(isbn.startsWith("Z")) {
+			return "OLD"+isbn+aisle;
+		}else {
+			return isbn+aisle;
+		}
 	}
 	
 	public boolean checkBookAlreadyExist(String id) {
@@ -25,6 +29,10 @@ public class LibraryService {
 		}else {
 			return false;
 		}
+	}
+	
+	public Library getBookById(String id) {
+		return repository.findById(id).get();
 	}
 	
 	

@@ -25,6 +25,9 @@ public class TaskService {
 		}
 	}
 	
+	public Task getTaskById(int id) {
+		return repository.findById(id).get();
+	}
 	
 	
 }

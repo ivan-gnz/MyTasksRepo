@@ -46,6 +46,12 @@ public class TaskController {
         return repository.findById(id).get();
     }
 	
+	//Consultar tareas por estado
+	@GetMapping("/tasks/status")
+    private List<Task> getTasksByStatus(@RequestParam(value="status") String status) {
+        return repository.findAllByStatus(status);
+    }
+	
 	//Crear una nueva tarea
 	@PostMapping("/addTask")
 	public ResponseEntity addTask(@RequestBody Task task) {
@@ -75,7 +81,8 @@ public class TaskController {
 	@PutMapping("/updateTask/{id}")
 	public ResponseEntity<Task> updateBook(@PathVariable(value="id")int id, @RequestBody Task task) {
 	
-		Task existingTask = repository.findById(id).get();
+		//Task existingTask = repository.findById(id).get();
+		Task existingTask = taskService.getTaskById(id);
 		
 		existingTask.setDescription(task.getDescription());
 		existingTask.setId(task.getId());
@@ -88,7 +95,8 @@ public class TaskController {
 	//Eliminar una tarea
 	@DeleteMapping("/deleteTask")
 	public ResponseEntity<String> deleteTaskkById(@RequestBody Task task) {
-		Task taskDelete = repository.findById(task.getId()).get();
+		//Task taskDelete = repository.findById(task.getId()).get();
+		Task taskDelete = taskService.getTaskById(task.getId());
 		repository.delete(taskDelete);
 		
 		logger.info("Task is deleted ");

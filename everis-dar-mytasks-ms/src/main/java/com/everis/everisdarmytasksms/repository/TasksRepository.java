@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.everis.everisdarmytasksms.controller.Task;
 
-public interface TasksRepository extends JpaRepository<Task, Integer> {
+public interface TasksRepository extends JpaRepository<Task, Integer>, TasksRepositoryCustom {
 
 }
