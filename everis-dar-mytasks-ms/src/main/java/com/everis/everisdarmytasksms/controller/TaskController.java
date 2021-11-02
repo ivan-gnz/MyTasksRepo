@@ -53,7 +53,7 @@ public class TaskController {
     }
 	
 	//Crear una nueva tarea
-	@PostMapping("/addTask")
+	@PostMapping("/tasks")
 	public ResponseEntity addTask(@RequestBody Task task) {
 		
 		AddResponse ad = new AddResponse();
@@ -78,7 +78,7 @@ public class TaskController {
 	
 	
 	//Actualizar tarea
-	@PutMapping("/updateTask/{id}")
+	@PutMapping("/tasks/{id}")
 	public ResponseEntity<Task> updateBook(@PathVariable(value="id")int id, @RequestBody Task task) {
 	
 		//Task existingTask = repository.findById(id).get();
@@ -93,7 +93,7 @@ public class TaskController {
 	}
 	
 	//Eliminar una tarea
-	@DeleteMapping("/deleteTask")
+	@DeleteMapping("/tasks")
 	public ResponseEntity<String> deleteTaskkById(@RequestBody Task task) {
 		//Task taskDelete = repository.findById(task.getId()).get();
 		Task taskDelete = taskService.getTaskById(task.getId());
