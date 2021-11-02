@@ -43,7 +43,7 @@ public class TaskController {
 	//Consultar una tarea por id
 	@GetMapping("/tasks/{id}")
     private Task getTaskById(@PathVariable(value="id") int id) {
-        return repository.findById(id).get();
+        return taskService.getTaskById(id);
     }
 	
 	//Consultar tareas por estado

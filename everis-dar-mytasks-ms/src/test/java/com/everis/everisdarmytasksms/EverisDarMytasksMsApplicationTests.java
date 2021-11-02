@@ -78,25 +78,25 @@ class EverisDarMytasksMsApplicationTests {
 	
 	}
 	
-	/*@Test
+	@Test
 	public void deleteTaskControllerTest() throws Exception{
 		when(taskService.getTaskById(anyInt())).thenReturn(buildTask());	
 		doNothing().when(repository).delete(buildTask());
-		this.mockMvc.perform(delete("/deleteBook").contentType(MediaType.APPLICATION_JSON)
+		this.mockMvc.perform(delete("/deleteTask").contentType(MediaType.APPLICATION_JSON)
 		.content("{\"id\":7}")).andDo(print())
 		.andExpect(status().isCreated()).andExpect(content().string("Task is deleted"));
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void getTaskByIdTest() throws Exception{
 		Task task = buildTask();
-		when(repository.findById(anyInt()).get()).thenReturn(task);
+		when(taskService.getTaskById(anyInt())).thenReturn(task);
 		this.mockMvc.perform(get("/tasks/"+task.getId()))
 		.andDo(print()).andExpect(status().isOk()).
-		andExpect(jsonPath("$.length()",is(1))).
-		andExpect(jsonPath("$.[0].id").value(7));
+		andExpect(jsonPath("$.length()",is(3))).
+		andExpect(jsonPath("$.id").value(7));
 		
-	}*/
+	}
 	
 	@Test
 	public void getTaskByStatusTest() throws Exception{
