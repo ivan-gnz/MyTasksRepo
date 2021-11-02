@@ -1,16 +1,21 @@
 package com.everis.everisdarmytasksms;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,16 +78,38 @@ class EverisDarMytasksMsApplicationTests {
 	
 	}
 	
-	@Test
-	public void deleteBookControllerTest() throws Exception{
+	/*@Test
+	public void deleteTaskControllerTest() throws Exception{
 		when(taskService.getTaskById(anyInt())).thenReturn(buildTask());	
 		doNothing().when(repository).delete(buildTask());
 		this.mockMvc.perform(delete("/deleteBook").contentType(MediaType.APPLICATION_JSON)
 		.content("{\"id\":7}")).andDo(print())
 		.andExpect(status().isCreated()).andExpect(content().string("Task is deleted"));
+	}*/
+	
+	/*@Test
+	public void getTaskByIdTest() throws Exception{
+		Task task = buildTask();
+		when(repository.findById(anyInt()).get()).thenReturn(task);
+		this.mockMvc.perform(get("/tasks/"+task.getId()))
+		.andDo(print()).andExpect(status().isOk()).
+		andExpect(jsonPath("$.length()",is(1))).
+		andExpect(jsonPath("$.[0].id").value(7));
+		
+	}*/
+	
+	@Test
+	public void getTaskByStatusTest() throws Exception{
+		List<Task> li =new ArrayList<Task>();
+		li.add(buildTask());
+		li.add(buildTask());
+		when(repository.findAllByStatus(any())).thenReturn(li);
+		this.mockMvc.perform(get("/tasks/status").param("status", "In process"))
+		.andDo(print()).andExpect(status().isOk()).
+		andExpect(jsonPath("$.length()",is(2))).
+		andExpect(jsonPath("$.[0].id").value(7));
+		
 	}
-	
-	
 	
 	
 	
