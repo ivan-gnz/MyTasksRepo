@@ -59,7 +59,7 @@ class EverisDarMytasksMsApplicationTests {
 		when(taskService.checkTaskAlreadyExist(task.getId())).thenReturn(false);
 		when(repository.save(any())).thenReturn(task);
 		
-		this.mockMvc.perform(post("/addTask").contentType(MediaType.APPLICATION_JSON)
+		this.mockMvc.perform(post("/tasks").contentType(MediaType.APPLICATION_JSON)
 		.content(jsonString)).andDo(print()).andExpect(status().isCreated())
 		.andExpect(jsonPath("$.id").value(task.getId()));
 		
@@ -72,7 +72,7 @@ class EverisDarMytasksMsApplicationTests {
 		String jsonString = map.writeValueAsString(UpdateTask());
 		when(taskService.getTaskById(anyInt())).thenReturn(buildTask());
 	
-		this.mockMvc.perform(put("/updateTask/"+task.getId()).contentType(MediaType.APPLICATION_JSON)
+		this.mockMvc.perform(put("/tasks/"+task.getId()).contentType(MediaType.APPLICATION_JSON)
 		.content(jsonString)).andDo(print()).andExpect(status().isOk())
 		.andExpect(content().json("{\"id\":7,\"description\":\"Hacer las pruebas\",\"status\":\"Finished\"}"));
 	
@@ -82,7 +82,7 @@ class EverisDarMytasksMsApplicationTests {
 	public void deleteTaskControllerTest() throws Exception{
 		when(taskService.getTaskById(anyInt())).thenReturn(buildTask());	
 		doNothing().when(repository).delete(buildTask());
-		this.mockMvc.perform(delete("/deleteTask").contentType(MediaType.APPLICATION_JSON)
+		this.mockMvc.perform(delete("/tasks").contentType(MediaType.APPLICATION_JSON)
 		.content("{\"id\":7}")).andDo(print())
 		.andExpect(status().isCreated()).andExpect(content().string("Task is deleted"));
 	}

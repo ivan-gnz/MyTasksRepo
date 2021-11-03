@@ -18,10 +18,5 @@ public class EverisDarMytasksMsApplication  /*implements CommandLineRunner */{
 		SpringApplication.run(EverisDarMytasksMsApplication.class, args);
 	}
 	
-	/*@Override
-	public void run(String[] args) {
-		Task task = repository.findById("1").get();
-		System.out.println(task.getDescription());
-	}*/
 
 }
