@@ -1,0 +1,21 @@
+.contenedorTask{
+	max-width: 96%;
+	min-height: 100px;
+	margin: 2%;
+	background-color: aliceblue;
+}
+
+.contenedorAdd{
+	min-height: 100px;
+	margin-left: 25%;
+	margin-right: 25%;
+	background-color: #dde9ca;
+	justify-content: flex-end;
+}
+
+.divBotonAdd{
+	position: relative;
+	display: flex;
+	margin: 2%;
+	justify-content: flex-end;
+}
