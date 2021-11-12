@@ -28,7 +28,8 @@ import com.everis.everisdarmytasksms.repository.TasksRepository;
 import com.everis.everisdarmytasksms.service.TaskService;
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+//@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "*")
 public class TaskController {
 	@Autowired
 	TasksRepository repository;
