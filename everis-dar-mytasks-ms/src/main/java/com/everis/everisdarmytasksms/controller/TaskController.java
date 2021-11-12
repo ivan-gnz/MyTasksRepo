@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +20,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.everisdarmytasksms.controller.Task;
 import com.everis.everisdarmytasksms.repository.TasksRepository;
 import com.everis.everisdarmytasksms.service.TaskService;
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class TaskController {
 	@Autowired
 	TasksRepository repository;
@@ -79,7 +83,7 @@ public class TaskController {
 	
 	//Actualizar tarea
 	@PutMapping("/tasks/{id}")
-	public ResponseEntity<Task> updateBook(@PathVariable(value="id")int id, @RequestBody Task task) {
+	public ResponseEntity<Task> updateTask(@PathVariable(value="id")int id, @RequestBody Task task) {
 	
 		//Task existingTask = repository.findById(id).get();
 		Task existingTask = taskService.getTaskById(id);
@@ -94,7 +98,7 @@ public class TaskController {
 	
 	//Eliminar una tarea
 	@DeleteMapping("/tasks")
-	public ResponseEntity<String> deleteTaskkById(@RequestBody Task task) {
+	public ResponseEntity<String> deleteTaskById(@RequestBody Task task) {
 		//Task taskDelete = repository.findById(task.getId()).get();
 		Task taskDelete = taskService.getTaskById(task.getId());
 		repository.delete(taskDelete);
